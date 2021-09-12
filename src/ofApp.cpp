@@ -36,6 +36,8 @@ void ofApp::update()
 void ofApp::draw()
 {
 	shader.begin();
+	//has to be after shader begin , places a global var on all process steps
+	shader.setUniform4f("fragCol", glm::vec4(0, 1, 1, 1));
 	//of takes care of passing this to the graphics buffer
 	triangle.draw();
 	shader.end();
