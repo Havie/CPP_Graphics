@@ -21,7 +21,12 @@ class ofApp : public ofBaseApp
 		void dragEvent(ofDragInfo dragInfo);
 		void gotMessage(ofMessage msg);
 
+		//MY STUFF
+		glm::vec4 NormalizeVector(glm::vec3 pos);
+
+
 private :
 	ofMesh triangle; //an ofMesh is an vertex buffer "openFramework Mesh"
+	ofShader shader;
 		
 };

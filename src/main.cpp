@@ -1,6 +1,10 @@
 #include "ofMain.h"
 #include "ofApp.h"
 
+
+//"In OpenGL, pixel coordinates start at the top left of the screen, and the Y axis increases as you go down."
+
+
 //========================================================================
 int main( )
 {
