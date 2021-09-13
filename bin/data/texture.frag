@@ -6,6 +6,6 @@ out vec4 outCol;
 uniform float brightness;
 void main()
 {
-	outCol = texture(parrotTex, fragUV) *brightness;
+	outCol = texture(parrotTex, fragUV) * brightness;
 
 }

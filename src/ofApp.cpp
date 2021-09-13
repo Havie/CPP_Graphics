@@ -32,12 +32,15 @@ void ofApp::setup()
 	quad.addIndices(indicies, 6);
 
 	
-	shader.load("uv_scrolling.vert", "texture.frag");
+	shader.load("uv_scrolling.vert", "frag_checkerboard.frag");
 	//Get in a new tex
 	ofDisableArbTex();
 	img.load("parrot.png");
+	//wow is it really shitty this isnt the same file extension
+	img2.load("checker.jpg");
 	//Allow us to access tex with >1 coord vals, 1.25 will wrap to 0.25
 	img.getTexture().setTextureWrap(GL_REPEAT, GL_REPEAT);
+	img2.getTexture().setTextureWrap(GL_REPEAT, GL_REPEAT);
 }
 
 
@@ -55,9 +58,12 @@ void ofApp::draw()
 	//has to be after shader begin , places a global var on all process steps
 	//shader.setUniform4f("fragCol", glm::vec4(0, 1, 1, 1));
 	shader.setUniformTexture("parrotTex",img , 0);
+	shader.setUniformTexture("checkboardTex", img2 , 0);
 	//Give our shader the ability to tick/scroll based on time
 	shader.setUniform1f("time", ofGetElapsedTimef());
 	shader.setUniform1f("brightness", brightness);
+	shader.setUniform1f("multiply", brightness);
+	shader.setUniform1f("add", brightness);
 	//of takes care of passing this to the graphics buffer
 	quad.draw();
 	//end the shader-must do 
