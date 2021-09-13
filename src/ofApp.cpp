@@ -17,9 +17,7 @@ void ofApp::setup()
 	quad.addColor(ofDefaultColorType(0, 1, 0, 1)); //green
 	quad.addColor(ofDefaultColorType(0, 0, 1, 1)); //blue
 	quad.addColor(ofDefaultColorType(1, 1, 1, 1)); //white
-	//for the faces?
-	ofIndexType indicies[6] = { 0,1,2,2,3,0 };
-	quad.addIndices(indicies, 6);
+
 	
 	//UV coords start at bot left of an image and increase towards top.
 	//Let this quad have textures (UV)
@@ -28,8 +26,15 @@ void ofApp::setup()
 	quad.addTexCoord(glm::vec2(1, 1));
 	quad.addTexCoord(glm::vec2(1, 0));
 
+		//for the faces?
+	ofIndexType indicies[6] = { 0,1,2,2,3,0 };
+	quad.addIndices(indicies, 6);
+
 	
-	shader.load("uv_passthrough.vert", "uv_vis.frag");
+	shader.load("uv_passthrough.vert", "texture.frag");
+	//Get in a new tex
+	ofDisableArbTex();
+	img.load("parrot.png");
 }
 
 
@@ -45,7 +50,8 @@ void ofApp::draw()
 	//begin the shader
 	shader.begin();
 	//has to be after shader begin , places a global var on all process steps
-	shader.setUniform4f("fragCol", glm::vec4(0, 1, 1, 1));
+	//shader.setUniform4f("fragCol", glm::vec4(0, 1, 1, 1));
+	shader.setUniformTexture("parrotTex",img , 0);
 	//of takes care of passing this to the graphics buffer
 	quad.draw();
 	//end the shader-must do 

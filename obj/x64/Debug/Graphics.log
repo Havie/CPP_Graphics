@@ -6,7 +6,6 @@ C:\Users\Steve\OpenFrameworks\of_v0.11.2_vs2017_release\libs\openFrameworks\math
 C:\Users\Steve\OpenFrameworks\of_v0.11.2_vs2017_release\libs\openFrameworks\math\ofMatrix4x4.h(913,12): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
 C:\Users\Steve\OpenFrameworks\of_v0.11.2_vs2017_release\libs\openFrameworks\math\ofMatrix4x4.h(914,12): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
 C:\Users\Steve\OpenFrameworks\of_v0.11.2_vs2017_release\libs\openFrameworks\math\ofMatrix4x4.h(915,12): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
-     Creating library bin\Graphics_debug.lib and object bin\Graphics_debug.exp
   Graphics.vcxproj -> C:\Users\Steve\OpenFrameworks\CPP_Project\Graphics\bin\Graphics_debug.exe
   
   	                   2	C:\Users\Steve\OpenFrameworks\of_v0.11.2_vs2017_release\libs\fmod\lib\vs\x64\

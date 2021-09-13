@@ -7,8 +7,10 @@ out vec2 fragUV;
 
 void main()
 {
-	gl_Position = vec4(pos, 1.0);	
-	fragUV = uv;
+	gl_Position = vec4(pos, 1.0);
+	//fragUV = uv;
+	//Flip the y for the parrot
+	fragUV = vec2(uv.x, 1.0 - uv.y);
 }
 
 /*
