@@ -30,5 +30,6 @@ private :
 	ofMesh quad;
 	ofShader shader;
 	ofImage img;
+	float brightness;
 		
 };

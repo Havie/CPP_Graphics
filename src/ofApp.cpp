@@ -3,6 +3,7 @@
 //--------------------------------------------------------------
 void ofApp::setup()
 {
+	brightness = 0.5f;
 	//quad.addVertex(glm::vec3(0.0, 0.0, 0.0));
 	//quad.addVertex(glm::vec3(0.0, 768.0, 0.0));
 	//quad.addVertex(glm::vec3(1024.0, 768.0, 0.0));
@@ -31,10 +32,12 @@ void ofApp::setup()
 	quad.addIndices(indicies, 6);
 
 	
-	shader.load("uv_passthrough.vert", "texture.frag");
+	shader.load("uv_scrolling.vert", "texture.frag");
 	//Get in a new tex
 	ofDisableArbTex();
 	img.load("parrot.png");
+	//Allow us to access tex with >1 coord vals, 1.25 will wrap to 0.25
+	img.getTexture().setTextureWrap(GL_REPEAT, GL_REPEAT);
 }
 
 
@@ -52,6 +55,9 @@ void ofApp::draw()
 	//has to be after shader begin , places a global var on all process steps
 	//shader.setUniform4f("fragCol", glm::vec4(0, 1, 1, 1));
 	shader.setUniformTexture("parrotTex",img , 0);
+	//Give our shader the ability to tick/scroll based on time
+	shader.setUniform1f("time", ofGetElapsedTimef());
+	shader.setUniform1f("brightness", brightness);
 	//of takes care of passing this to the graphics buffer
 	quad.draw();
 	//end the shader-must do 
