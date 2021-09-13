@@ -3,20 +3,33 @@
 //--------------------------------------------------------------
 void ofApp::setup()
 {
-	//triangle.addVertex(glm::vec3(0.0, 0.0, 0.0));
-	//triangle.addVertex(glm::vec3(0.0, 768.0, 0.0));
-	//triangle.addVertex(glm::vec3(1024.0, 768.0, 0.0));
+	//quad.addVertex(glm::vec3(0.0, 0.0, 0.0));
+	//quad.addVertex(glm::vec3(0.0, 768.0, 0.0));
+	//quad.addVertex(glm::vec3(1024.0, 768.0, 0.0));
+
+	quad.addVertex(glm::vec3(-1, -1, 0));
+	quad.addVertex(glm::vec3(-1, 1, 0));
+	quad.addVertex(glm::vec3(1, 1, 0));
+	quad.addVertex(glm::vec3(1, -1, 0));
+
 	
-	triangle.addVertex(glm::vec3(-1.0f, 1.0f, 0.0f));
-	triangle.addVertex(glm::vec3(-1.0f, -1.0f, 0.0f));
-	triangle.addVertex(glm::vec3(1.0f, -1.0f, 0.0f));
+	quad.addColor(ofDefaultColorType(1, 0, 0, 1)); //red
+	quad.addColor(ofDefaultColorType(0, 1, 0, 1)); //green
+	quad.addColor(ofDefaultColorType(0, 0, 1, 1)); //blue
+	quad.addColor(ofDefaultColorType(1, 1, 1, 1)); //white
+	//for the faces?
+	ofIndexType indicies[6] = { 0,1,2,2,3,0 };
+	quad.addIndices(indicies, 6);
 	
-	triangle.addColor(ofFloatColor(1.0f,0.0f,0.0f,1.0f));
-	triangle.addColor(ofFloatColor(0.0f,1.0f,0.0f,1.0f));
-	triangle.addColor(ofFloatColor(0.0f,0.0f,1.0f,1.0f));
+	//UV coords start at bot left of an image and increase towards top.
+	//Let this quad have textures (UV)
+	quad.addTexCoord(glm::vec2(0, 0));
+	quad.addTexCoord(glm::vec2(0, 1));
+	quad.addTexCoord(glm::vec2(1, 1));
+	quad.addTexCoord(glm::vec2(1, 0));
+
 	
-	
-	shader.load("first_vertex.vert", "first_fragment.frag");
+	shader.load("uv_passthrough.vert", "uv_vis.frag");
 }
 
 
@@ -34,7 +47,7 @@ void ofApp::draw()
 	//has to be after shader begin , places a global var on all process steps
 	shader.setUniform4f("fragCol", glm::vec4(0, 1, 1, 1));
 	//of takes care of passing this to the graphics buffer
-	triangle.draw();
+	quad.draw();
 	//end the shader-must do 
 	shader.end();
 
@@ -44,8 +57,8 @@ void ofApp::draw()
 //--------------------------------------------------------------
 void ofApp::keyPressed(int key)
 {
-	glm::vec3 curPos = triangle.getVertex(2);
-	triangle.setVertex(2, curPos + glm::vec3(0, -1, 0 ));
+	glm::vec3 curPos = quad.getVertex(2);
+	quad.setVertex(2, curPos + glm::vec3(0, -1, 0 ));
 }
 
 //--------------------------------------------------------------

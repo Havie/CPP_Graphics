@@ -27,6 +27,7 @@ class ofApp : public ofBaseApp
 
 private :
 	ofMesh triangle; //an ofMesh is an vertex buffer "openFramework Mesh"
+	ofMesh quad;
 	ofShader shader;
 		
 };
