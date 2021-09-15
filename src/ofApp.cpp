@@ -3,47 +3,64 @@
 //--------------------------------------------------------------
 void ofApp::setup()
 {
-	brightness = 0.5f;
-	//quad.addVertex(glm::vec3(0.0, 0.0, 0.0));
-	//quad.addVertex(glm::vec3(0.0, 768.0, 0.0));
-	//quad.addVertex(glm::vec3(1024.0, 768.0, 0.0));
+	buildMesh(charMesh, 0.25, 0.5, glm::vec3(0.0f, 0.15f, 0.0f));
 
-	quad.addVertex(glm::vec3(-1, -1, 0));
-	quad.addVertex(glm::vec3(-1, 1, 0));
-	quad.addVertex(glm::vec3(1, 1, 0));
-	quad.addVertex(glm::vec3(1, -1, 0));
-
-	
-	quad.addColor(ofDefaultColorType(1, 0, 0, 1)); //red
-	quad.addColor(ofDefaultColorType(0, 1, 0, 1)); //green
-	quad.addColor(ofDefaultColorType(0, 0, 1, 1)); //blue
-	quad.addColor(ofDefaultColorType(1, 1, 1, 1)); //white
-
-	
-	//UV coords start at bot left of an image and increase towards top.
-	//Let this quad have textures (UV)
-	quad.addTexCoord(glm::vec2(0, 0));
-	quad.addTexCoord(glm::vec2(0, 1));
-	quad.addTexCoord(glm::vec2(1, 1));
-	quad.addTexCoord(glm::vec2(1, 0));
-
-		//for the faces?
-	ofIndexType indicies[6] = { 0,1,2,2,3,0 };
-	quad.addIndices(indicies, 6);
-
-	
-	shader.load("uv_scrolling.vert", "frag_checkerboard.frag");
+	charShader.load("uv_passthrough.vert", "alphaTest.frag");
 	//Get in a new tex
 	ofDisableArbTex();
-	img.load("parrot.png");
-	//wow is it really shitty this isnt the same file extension
-	img2.load("checker.jpg");
+	alienImg.load("alien.png");
 	//Allow us to access tex with >1 coord vals, 1.25 will wrap to 0.25
-	img.getTexture().setTextureWrap(GL_REPEAT, GL_REPEAT);
-	img2.getTexture().setTextureWrap(GL_REPEAT, GL_REPEAT);
+	alienImg.getTexture().setTextureWrap(GL_REPEAT, GL_REPEAT);
 }
 
+//--------------------------------------------------------------
+void ofApp::buildMesh(ofMesh& mesh, float w, float h, glm::vec3 pos)
+{
+	float verts[] = 
+	{
+		-w + pos.x, -h + pos.y, pos.z,
+		-w + pos.x, h + pos.y, pos.z,
+		w + pos.x, h + pos.y, pos.z,
+		w + pos.x, -h + pos.y, pos.z };
 
+	float uvs[] = { 0,0, 0,1, 1,1, 1,0 };
+
+	for ( int i = 0; i < 4; ++i )
+	{
+		//index
+		int idx = i * 3;
+		//uv index
+		int uvIdx = i * 2;
+
+		mesh.addVertex(glm::vec3(verts[idx], verts[idx + 1], verts[idx + 2]));
+		mesh.addTexCoord(glm::vec2(uvs[uvIdx], uvs[uvIdx + 1]));
+
+		ofIndexType indices[6] = { 0,1,2,2,3,0 };
+		mesh.addIndices(indices, 6);
+	}
+}
+
+//--------------------------------------------------------------
+void ofApp::draw()
+{
+	//begin the shader
+	charShader.begin();
+	//has to be after shader begin , places a global var on all process steps
+	//shader.setUniform4f("fragCol", glm::vec4(0, 1, 1, 1));
+	//uniform sampler2D greenMan - defined in fragmemt
+	charShader.setUniformTexture("greenMan", alienImg , 0);
+	//Give our shader the ability to tick/scroll based on time
+	charShader.setUniform1f("time", ofGetElapsedTimef());
+	charShader.setUniform1f("brightness", brightness);
+	charShader.setUniform1f("multiply", brightness);
+	charShader.setUniform1f("add", brightness);
+	//of takes care of passing this to the graphics buffer
+	charMesh.draw();
+	//end the shader-must do 
+	charShader.end();
+
+	//ofSetBackgroundColor(ofColor::azure);
+}
 //--------------------------------------------------------------
 void ofApp::update()
 {
@@ -51,33 +68,10 @@ void ofApp::update()
 }
 
 //--------------------------------------------------------------
-void ofApp::draw()
-{
-	//begin the shader
-	shader.begin();
-	//has to be after shader begin , places a global var on all process steps
-	//shader.setUniform4f("fragCol", glm::vec4(0, 1, 1, 1));
-	shader.setUniformTexture("parrotTex",img , 0);
-	//put the next teture in a new slot
-	shader.setUniformTexture("checkboardTex", img2 , 1);
-	//Give our shader the ability to tick/scroll based on time
-	shader.setUniform1f("time", ofGetElapsedTimef());
-	shader.setUniform1f("brightness", brightness);
-	shader.setUniform1f("multiply", brightness);
-	shader.setUniform1f("add", brightness);
-	//of takes care of passing this to the graphics buffer
-	quad.draw();
-	//end the shader-must do 
-	shader.end();
-
-	//ofSetBackgroundColor(ofColor::azure);
-}
-
-//--------------------------------------------------------------
 void ofApp::keyPressed(int key)
 {
-	glm::vec3 curPos = quad.getVertex(2);
-	quad.setVertex(2, curPos + glm::vec3(0, -1, 0 ));
+	glm::vec3 curPos = charMesh.getVertex(2);
+	charMesh.setVertex(2, curPos + glm::vec3(0, -1, 0 ));
 }
 
 //--------------------------------------------------------------

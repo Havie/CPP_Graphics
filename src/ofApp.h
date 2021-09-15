@@ -27,12 +27,13 @@ class ofApp : public ofBaseApp
 
 private :
 	//ofMesh triangle; //an ofMesh is an vertex buffer "openFramework Mesh"
-	ofMesh quad;
-	ofShader shader;
-	ofImage img;
-	ofImage img2;
+	ofMesh charMesh;
+	ofShader charShader;
+	ofImage alienImg;
 	float brightness=0.5f;
 	float multiply=1;
 	float add=0;
+
+	void buildMesh(ofMesh& mesh, float w, float h, glm::vec3 pos);
 		
 };

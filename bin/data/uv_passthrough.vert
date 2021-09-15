@@ -9,12 +9,12 @@ void main()
 {
 	gl_Position = vec4(pos, 1.0);
 	//fragUV = uv;
-	//Flip the y for the parrot
+	//Flip the y for the img becuz
 	fragUV = vec2(uv.x, 1.0 - uv.y);
 }
 
 /*
-By default openFrameworks assigns vertex attr to following locs
+By default openFrameworks assigns vertex attr to following locations
 1.pos
 2.color
 3.normal
