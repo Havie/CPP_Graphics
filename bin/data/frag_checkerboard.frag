@@ -13,5 +13,4 @@ void main()
 
 	//outCol= mix(parrot, checker, 0.5f);
 	outCol= mix(parrot, checker, checker.r);
-
 }

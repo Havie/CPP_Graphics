@@ -58,7 +58,8 @@ void ofApp::draw()
 	//has to be after shader begin , places a global var on all process steps
 	//shader.setUniform4f("fragCol", glm::vec4(0, 1, 1, 1));
 	shader.setUniformTexture("parrotTex",img , 0);
-	shader.setUniformTexture("checkboardTex", img2 , 0);
+	//put the next teture in a new slot
+	shader.setUniformTexture("checkboardTex", img2 , 1);
 	//Give our shader the ability to tick/scroll based on time
 	shader.setUniform1f("time", ofGetElapsedTimef());
 	shader.setUniform1f("brightness", brightness);
