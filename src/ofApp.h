@@ -33,7 +33,7 @@ private :
 	float brightness=0.5f;
 	float multiply=1;
 	float add=0;
-
+	bool needsReload { true };
 	void buildMesh(ofMesh& mesh, float w, float h, glm::vec3 pos);
-		
+	void reloadShaders();
 };

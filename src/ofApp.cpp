@@ -4,8 +4,7 @@
 void ofApp::setup()
 {
 	buildMesh(charMesh, 0.25, 0.5, glm::vec3(0.0f, 0.15f, 0.0f));
-
-	charShader.load("uv_passthrough.vert", "alphaTest.frag");
+	reloadShaders();
 	//Get in a new tex
 	ofDisableArbTex();
 	alienImg.load("alien.png");
@@ -41,6 +40,13 @@ void ofApp::buildMesh(ofMesh& mesh, float w, float h, glm::vec3 pos)
 }
 
 //--------------------------------------------------------------
+void ofApp::reloadShaders()
+{
+	charShader.load("uv_passthrough.vert", "alphaTest.frag");
+	needsReload = false;
+}
+
+//--------------------------------------------------------------
 void ofApp::draw()
 {
 	//begin the shader
@@ -64,7 +70,10 @@ void ofApp::draw()
 //--------------------------------------------------------------
 void ofApp::update()
 {
-
+	if ( needsReload )
+	{
+		reloadShaders();
+	}
 }
 
 //--------------------------------------------------------------
@@ -77,7 +86,11 @@ void ofApp::keyPressed(int key)
 //--------------------------------------------------------------
 void ofApp::keyReleased(int key)
 {
-
+	if ( key == '`' )
+	{
+		//reload shaders
+		needsReload = true;
+	}
 }
 
 //--------------------------------------------------------------
