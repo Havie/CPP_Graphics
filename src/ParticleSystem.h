@@ -6,6 +6,9 @@
 // A class template that provides most of the boilerplate for a simple particle system.
 // Source: https://learnopengl.com/In-Practice/2D-Game/Particles
 template <typename ParticleType>
+
+
+
 class ParticleSystem
 {
 public:

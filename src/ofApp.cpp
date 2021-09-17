@@ -50,23 +50,37 @@ void ofApp::reloadShaders()
 void ofApp::draw()
 {
 	//begin the shader
-	charShader.begin();
-	//has to be after shader begin , places a global var on all process steps
-	//shader.setUniform4f("fragCol", glm::vec4(0, 1, 1, 1));
-	//uniform sampler2D greenMan - defined in fragmemt
-	charShader.setUniformTexture("greenMan", alienImg , 0);
-	//Give our shader the ability to tick/scroll based on time
-	charShader.setUniform1f("time", ofGetElapsedTimef());
-	charShader.setUniform1f("brightness", brightness);
-	charShader.setUniform1f("multiply", brightness);
-	charShader.setUniform1f("add", brightness);
-	//of takes care of passing this to the graphics buffer
-	charMesh.draw();
-	//end the shader-must do 
-	charShader.end();
+	//charShader.begin();
+	////has to be after shader begin , places a global var on all process steps
+	////shader.setUniform4f("fragCol", glm::vec4(0, 1, 1, 1));
+	////uniform sampler2D greenMan - defined in fragmemt
+	//charShader.setUniformTexture("greenMan", alienImg , 0);
+	////Give our shader the ability to tick/scroll based on time
+	//charShader.setUniform1f("time", ofGetElapsedTimef());
+	//charShader.setUniform1f("brightness", brightness);
+	//charShader.setUniform1f("multiply", brightness);
+	//charShader.setUniform1f("add", brightness);
+	////of takes care of passing this to the graphics buffer
+	//charMesh.draw();
+	////end the shader-must do 
+	//charShader.end();
 
 	//ofSetBackgroundColor(ofColor::azure);
+
+	//TODO draw the particles
+	//shader.begin();
+	//foreach
+	for (const BasicParticle p : particleSystem )
+	{
+		//shader.setUniform("particlePosition", p.getPosition());
+		//shader.setUniform("particleSize", p.getSize());
+		//etc
+	}
+
+	//shader.end();
+
 }
+
 //--------------------------------------------------------------
 void ofApp::update()
 {
@@ -74,6 +88,8 @@ void ofApp::update()
 	{
 		reloadShaders();
 	}
+
+	particleSystem.update(ofGetLastFrameTime());
 }
 
 //--------------------------------------------------------------

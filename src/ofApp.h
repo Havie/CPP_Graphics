@@ -1,6 +1,9 @@
 #pragma once
 
 #include "ofMain.h"
+#include "baseParticleGenerator.h"
+#include "baseParticle.h"
+#include "ParticleSystem.h"
 
 class ofApp : public ofBaseApp
 {
@@ -36,4 +39,8 @@ private :
 	bool needsReload { true };
 	void buildMesh(ofMesh& mesh, float w, float h, glm::vec3 pos);
 	void reloadShaders();
+
+	//You can new things up like { int x} instead of =new ClassName(int x)
+	BasicParticleGenerator particleGenerator {/* optional paramrs */ };
+	ParticleSystem<BasicParticle> particleSystem { particleGenerator, 42, 20.0f };
 };
