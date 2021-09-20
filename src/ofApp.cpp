@@ -1,4 +1,6 @@
 #include "ofApp.h"
+#include "basicParticle.h"
+#include "basicParticleGenerator.h"
 
 //--------------------------------------------------------------
 void ofApp::setup()
@@ -7,9 +9,9 @@ void ofApp::setup()
 	reloadShaders();
 	//Get in a new tex
 	ofDisableArbTex();
-	alienImg.load("alien.png");
+	particle1.load("textures/circle_01.png");
 	//Allow us to access tex with >1 coord vals, 1.25 will wrap to 0.25
-	alienImg.getTexture().setTextureWrap(GL_REPEAT, GL_REPEAT);
+	particle1.getTexture().setTextureWrap(GL_REPEAT, GL_REPEAT);
 }
 
 //--------------------------------------------------------------

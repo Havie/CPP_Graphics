@@ -192,11 +192,17 @@
     </ResourceCompile>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\basicParticle.cpp" />
+    <ClCompile Include="src\basicParticleGenerator.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\ofApp.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\basicParticle.h" />
+    <ClInclude Include="src\basicParticleGenerator.h" />
     <ClInclude Include="src\ofApp.h" />
+    <ClInclude Include="src\Particle.h" />
+    <ClInclude Include="src\ParticleSystem.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ProjectExtensions>

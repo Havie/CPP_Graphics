@@ -1,9 +1,9 @@
 #pragma once
 
 #include "ofMain.h"
-#include "baseParticleGenerator.h"
-#include "baseParticle.h"
 #include "ParticleSystem.h"
+#include "basicParticle.h"
+#include "basicParticleGenerator.h"
 
 class ofApp : public ofBaseApp
 {
@@ -32,7 +32,7 @@ private :
 	//ofMesh triangle; //an ofMesh is an vertex buffer "openFramework Mesh"
 	ofMesh charMesh;
 	ofShader charShader;
-	ofImage alienImg;
+	ofImage particle1;
 	float brightness=0.5f;
 	float multiply=1;
 	float add=0;
