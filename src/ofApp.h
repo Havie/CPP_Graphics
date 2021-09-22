@@ -41,6 +41,7 @@ private :
 	void reloadShaders();
 
 	//You can new things up like { int x} instead of =new ClassName(int x)
-	BasicParticleGenerator particleGenerator {/* optional paramrs */ };
+	//Velocitys shudnt be floats?:
+	BasicParticleGenerator particleGenerator { 1,  1,  5, 1,5 };
 	ParticleSystem<BasicParticle> particleSystem { particleGenerator, 42, 20.0f };
 };

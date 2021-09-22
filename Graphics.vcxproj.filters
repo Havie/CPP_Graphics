@@ -15,10 +15,10 @@
     <ClCompile Include="src\ofApp.cpp">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="src\baseParticle.cpp">
+    <ClCompile Include="src\basicParticle.cpp">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="src\baseParticleGenerator.cpp">
+    <ClCompile Include="src\basicParticleGenerator.cpp">
       <Filter>src</Filter>
     </ClCompile>
   </ItemGroup>
@@ -32,10 +32,10 @@
     <ClInclude Include="src\ParticleSystem.h">
       <Filter>src</Filter>
     </ClInclude>
-    <ClInclude Include="src\baseParticle.h">
+    <ClInclude Include="src\basicParticle.h">
       <Filter>src</Filter>
     </ClInclude>
-    <ClInclude Include="src\baseParticleGenerator.h">
+    <ClInclude Include="src\basicParticleGenerator.h">
       <Filter>src</Filter>
     </ClInclude>
   </ItemGroup>

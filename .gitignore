@@ -46,3 +46,5 @@
 .vs/Graphics/v16/Browse.VC.db
 .vs/slnx.sqlite
 .vs/Graphics/v16/Browse.VC.db
+*.tlog
+*.tlog
