@@ -30,8 +30,8 @@ class ofApp : public ofBaseApp
 
 private :
 	//ofMesh triangle; //an ofMesh is an vertex buffer "openFramework Mesh"
-	ofMesh charMesh;
-	ofShader charShader;
+	ofMesh particleMesh;
+	ofShader particleShader;
 	ofImage particle1;
 	float brightness=0.5f;
 	float multiply=1;

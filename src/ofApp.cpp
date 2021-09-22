@@ -5,7 +5,7 @@
 //--------------------------------------------------------------
 void ofApp::setup()
 {
-	buildMesh(charMesh, 0.25, 0.5, glm::vec3(0.0f, 0.15f, 0.0f));
+	buildMesh(particleMesh, 0.25, 0.5, glm::vec3(0.0f, 0.15f, 0.0f));
 	reloadShaders();
 	//Get in a new tex
 	ofDisableArbTex();
@@ -44,42 +44,27 @@ void ofApp::buildMesh(ofMesh& mesh, float w, float h, glm::vec3 pos)
 //--------------------------------------------------------------
 void ofApp::reloadShaders()
 {
-	charShader.load("uv_passthrough.vert", "alphaTest.frag");
+	particleShader.load("uv_passthrough.vert", "alphaTest.frag");
 	needsReload = false;
 }
 
 //--------------------------------------------------------------
 void ofApp::draw()
 {
-	//begin the shader
-	//charShader.begin();
-	////has to be after shader begin , places a global var on all process steps
-	////shader.setUniform4f("fragCol", glm::vec4(0, 1, 1, 1));
-	////uniform sampler2D greenMan - defined in fragmemt
-	//charShader.setUniformTexture("greenMan", alienImg , 0);
-	////Give our shader the ability to tick/scroll based on time
-	//charShader.setUniform1f("time", ofGetElapsedTimef());
-	//charShader.setUniform1f("brightness", brightness);
-	//charShader.setUniform1f("multiply", brightness);
-	//charShader.setUniform1f("add", brightness);
-	////of takes care of passing this to the graphics buffer
-	//charMesh.draw();
-	////end the shader-must do 
-	//charShader.end();
+	ofSetBackgroundColor(ofColor::black);
 
-	//ofSetBackgroundColor(ofColor::azure);
-
-	//TODO draw the particles
-	//shader.begin();
-	//foreach
-	for (const BasicParticle p : particleSystem )
+	//draw the particles
+	particleShader.begin();
+	//make it a ref so its not a copy 
+	for (const BasicParticle& p : particleSystem )
 	{
-		//shader.setUniform("particlePosition", p.getPosition());
-		//shader.setUniform("particleSize", p.getSize());
+		particleShader.setUniform2f("particlePosition", p.getPos());
+		particleShader.setUniform1f("particleSize", p.getSize());
 		//etc
+		particleMesh.draw();
 	}
 
-	//shader.end();
+	particleShader.end();
 
 }
 
@@ -97,8 +82,8 @@ void ofApp::update()
 //--------------------------------------------------------------
 void ofApp::keyPressed(int key)
 {
-	glm::vec3 curPos = charMesh.getVertex(2);
-	charMesh.setVertex(2, curPos + glm::vec3(0, -1, 0 ));
+	glm::vec3 curPos = particleMesh.getVertex(2);
+	particleMesh.setVertex(2, curPos + glm::vec3(0, -1, 0 ));
 }
 
 //--------------------------------------------------------------

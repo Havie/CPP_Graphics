@@ -13,6 +13,11 @@ float BasicParticle::getLife() const
     return life;
 }
 
+float BasicParticle::getSize() const
+{
+    return size;
+}
+
 glm::vec2 BasicParticle::getPos() const
 {
     return pos;
