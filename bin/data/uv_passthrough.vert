@@ -3,11 +3,14 @@
 layout (location =0) in vec3 pos;
 layout (location =3) in vec2 uv;
 
+uniform vec2 particlePosition;
+
 out vec2 fragUV;
 
 void main()
 {
-	gl_Position = vec4(pos, 1.0);
+	vec3 scale = vec3(0.15, 0.15, 0);
+	gl_Position = vec4((pos * scale) + vec3(particlePosition, 0), 1.0);
 	//fragUV = uv;
 	//Flip the y for the img becuz
 	fragUV = vec2(uv.x, 1.0 - uv.y);

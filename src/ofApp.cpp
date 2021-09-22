@@ -5,11 +5,12 @@
 //--------------------------------------------------------------
 void ofApp::setup()
 {
-	buildMesh(particleMesh, 0.25, 0.5, glm::vec3(0.0f, 0.15f, 0.0f));
+	ofSetBackgroundColor(ofColor::dimGray);
+	buildMesh(particleMesh, 1, 1, glm::vec3(0.0f, 0.0f, 0.0f));
 	reloadShaders();
 	//Get in a new tex
 	ofDisableArbTex();
-	particle1.load("textures/circle_01.png");
+	particle1.load("textures/magic_01.png");
 	//Allow us to access tex with >1 coord vals, 1.25 will wrap to 0.25
 	particle1.getTexture().setTextureWrap(GL_REPEAT, GL_REPEAT);
 }
@@ -44,17 +45,17 @@ void ofApp::buildMesh(ofMesh& mesh, float w, float h, glm::vec3 pos)
 //--------------------------------------------------------------
 void ofApp::reloadShaders()
 {
-	particleShader.load("uv_passthrough.vert", "alphaTest.frag");
+	particleShader.load("uv_passthrough.vert", "colorChange.frag");
 	needsReload = false;
 }
 
 //--------------------------------------------------------------
 void ofApp::draw()
 {
-	ofSetBackgroundColor(ofColor::black);
-
+	ofEnableBlendMode(OF_BLENDMODE_ADD);
 	//draw the particles
 	particleShader.begin();
+	particleShader.setUniformTexture("particle", particle1, 0);
 	//make it a ref so its not a copy 
 	for (const BasicParticle& p : particleSystem )
 	{
