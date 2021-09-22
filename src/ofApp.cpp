@@ -66,7 +66,7 @@ void ofApp::draw()
 	}
 
 	particleShader.end();
-
+	ofDisableBlendMode();
 }
 
 //--------------------------------------------------------------
