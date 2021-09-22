@@ -1,12 +1,11 @@
 #pragma once
 
 #include "ofMain.h"
+#include "BasicParticleGenerator.h"
 #include "ParticleSystem.h"
-#include "basicParticle.h"
-#include "basicParticleGenerator.h"
 
-class ofApp : public ofBaseApp
-{
+class ofApp : public ofBaseApp{
+
 	public:
 		void setup();
 		void update();
@@ -23,24 +22,14 @@ class ofApp : public ofBaseApp
 		void windowResized(int w, int h);
 		void dragEvent(ofDragInfo dragInfo);
 		void gotMessage(ofMessage msg);
+		
+private:
+	ofImage particleImg1;
+	ofMesh quad;
+	ofShader shader;
+	
+	BasicParticleGenerator particleGenerator{};
+	ParticleSystem<BasicParticle> particleSystem{particleGenerator, 42, 20.0f};
 
-		//MY STUFF
-		glm::vec4 NormalizeVector(glm::vec3 pos);
-
-
-private :
-	//ofMesh triangle; //an ofMesh is an vertex buffer "openFramework Mesh"
-	ofMesh particleMesh;
-	ofShader particleShader;
-	ofImage particle1;
-	float brightness=0.5f;
-	float multiply=1;
-	float add=0;
-	bool needsReload { true };
 	void buildMesh(ofMesh& mesh, float w, float h, glm::vec3 pos);
-	void reloadShaders();
-
-	//You can new things up like { int x} instead of =new ClassName(int x)
-	BasicParticleGenerator particleGenerator {/* optional paramrs */ };
-	ParticleSystem<BasicParticle> particleSystem { particleGenerator, 42, 20.0f };
 };

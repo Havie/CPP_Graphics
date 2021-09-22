@@ -1,6 +1,6 @@
 #pragma once
 
-// An interface for a particle. - no interface keyword in c++
+// An interface for a particle.
 class Particle
 {
 public:

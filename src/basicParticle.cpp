@@ -1,40 +1,40 @@
-#include "basicParticle.h"
+#include "BasicParticle.h"
 
-BasicParticle::BasicParticle(float life, float size, glm::vec2 pos, glm::vec2 velo)
+
+BasicParticle::BasicParticle(float life, float size, glm::vec2 pos, glm::vec2 velocity)
 {
-    this->life = life;
-    this->size = size;
-    this->pos = pos;
-    this->velo = velo;
+	this->life = life;
+	this->size = size;
+	this->position = pos;
+	this->velocity = velocity;
 }
 
 float BasicParticle::getLife() const
 {
-    return life;
+	return life;
+}
+
+glm::vec2 BasicParticle::getVelocity() const
+{
+	return velocity;
+}
+
+glm::vec2 BasicParticle::getPosition() const
+{
+	return position;
 }
 
 float BasicParticle::getSize() const
 {
-    return size;
+	return size;
 }
 
-glm::vec2 BasicParticle::getPos() const
+void BasicParticle::update(float dt)
 {
-    return pos;
-}
+	//life decreases by .5 every second
+	life -= dt * 0.5;
 
-
-void BasicParticle::update(float delatTime)
-{
-    float decrement= delatTime * 0.5f;
-    //update life
-    life -= decrement;
-    //update size
-    size -= decrement;
-
-    //update velo
-    velo = velo / delatTime;
-    //update pos
-    pos += velo * delatTime;
-    
+	//update position; velocity? position?
+	position += position * velocity * dt;
+	velocity -= velocity * dt;
 }

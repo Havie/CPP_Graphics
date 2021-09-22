@@ -1,14 +1,20 @@
-#include "basicParticleGenerator.h"
-
-BasicParticleGenerator::BasicParticleGenerator( float life, float minSize, float maxSize, float minVelo, float maxVelo)
-{
-
-}
+#include "BasicParticleGenerator.h"
 
 void BasicParticleGenerator::respawn(BasicParticle& particle) const
 {
-	//todo- randomize (pos, color, tex)
+	float life = 1.0f;
+	float size = 0.5f * ((rand() % 1001) / 1000.0);
+	glm::vec2 position = glm::vec2((((rand() % 1001)-500) / 1000.0), (((rand() % 1001) - 500) / 1000.0));
+	glm::vec2 velocity = glm::vec2((((rand() % 1001)-500) / 1000.0), (((rand() % 1001) - 500) / 1000.0));
 
-	//Some odd kind of MOVE command makes this not allocate new memory?
-	particle = BasicParticle(1.0, 2, glm::vec2(), glm::vec2(1, 1));
+	particle = BasicParticle(life, size, position, velocity);
+	//particle.setLife(1.0f);
+	
+	/*std::cout << "life: " << life;
+	std::cout << "size: " << size;
+	std::cout << "position: " << position;
+	std::cout << "velocity " << velocity;*/
+
+	//randomize things
+	int r = rand();
 }
