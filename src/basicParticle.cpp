@@ -1,5 +1,4 @@
 #include "basicParticle.h"
-
 BasicParticle::BasicParticle(float life, float size, glm::vec2 pos, glm::vec2 velo)
 {
     this->life = life;
