@@ -29,11 +29,17 @@ private:
 	ofImage particleImg3;
 	ofImage particleImg4;
 	ofImage particleImg5;
-	ofMesh quad;
+	ofImage smokeImages[10];
+	ofMesh lightMesh;
+	ofMesh smokeMesh;
 	ofShader shader;
-	
-	BasicParticleGenerator particleGenerator{};
+								//(float life, float minSize, float maxSize, glm::vec2 minVelo, glm::vec2 maxVelo);
+	BasicParticleGenerator particleGenerator { 1,  1, 2,  glm::vec2(0,0),glm::vec2(10,10) , .5, .5};
+	BasicParticleGenerator smokeGenerator { 1,  2, 4,  glm::vec2(0,0),glm::vec2(0,10), .1, .1 };
 	ParticleSystem<BasicParticle> particleSystem{particleGenerator, 42, 20.0f};
+	ParticleSystem<BasicParticle> smokeSystem{smokeGenerator, 42, 20.0f};
+
+	
 
 	void buildMesh(ofMesh& mesh, float w, float h, glm::vec3 pos);
 };

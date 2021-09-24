@@ -4,19 +4,33 @@
 void ofApp::setup(){
 	ofDisableArbTex();
 
-	buildMesh(quad, 1.0, 1.0, glm::vec3(0.0, 0.0, 0.0));
+	buildMesh(lightMesh, 1.0, 1.0, glm::vec3(0.0, 0.0, 0.0));
+	buildMesh(smokeMesh, 1.0, 1.0, glm::vec3(0.0, 0.0, 0.0));
 	shader.load("passthrough.vert", "colorChange.frag");
-
+	//load light flare imgs
 	particleImg1.load("textures/magic_01.png");
 	particleImg2.load("textures/magic_02.png");
 	particleImg3.load("textures/magic_03.png");
 	particleImg4.load("textures/magic_04.png");
 	particleImg5.load("textures/magic_05.png");
+	//load smoke imgs
+	smokeImages[0].load("textures/smoke_01.png");
+	smokeImages[1].load("textures/smoke_02.png");
+	smokeImages[2].load("textures/smoke_03.png");
+	smokeImages[3].load("textures/smoke_04.png");
+	smokeImages[4].load("textures/smoke_05.png");
+	smokeImages[5].load("textures/smoke_06.png");
+	smokeImages[6].load("textures/smoke_07.png");
+	smokeImages[7].load("textures/smoke_08.png");
+	smokeImages[8].load("textures/smoke_09.png");
+	smokeImages[9].load("textures/smoke_10.png");
+
 }
 
 //--------------------------------------------------------------
 void ofApp::update(){
 	particleSystem.update(ofGetLastFrameTime());
+	smokeSystem.update(ofGetLastFrameTime());
 }
 
 //--------------------------------------------------------------
@@ -24,11 +38,13 @@ void ofApp::draw(){
 	ofEnableBlendMode(OF_BLENDMODE_ADD);
 	shader.begin();
 	
-
 	//particleSystem drawing
-	for (const BasicParticle p : particleSystem) {
+	/*for (const BasicParticle p : particleSystem) {
+		
 		shader.setUniform2f("position", p.getPosition());
 		shader.setUniform1f("life", p.getLife());
+		shader.setUniform4f("color", glm::vec4(1.0, 1.0, 0.5, 1.0));
+
 		if (p.getLife() > 0.9 && p.getLife() != 1) {
 			shader.setUniformTexture("particle", particleImg1, 0);
 		} else if (p.getLife() > 0.8) {
@@ -41,13 +57,27 @@ void ofApp::draw(){
 			shader.setUniformTexture("particle", particleImg5, 0);
 		}
 		//std::cout << "Position: " << p.getPosition() << "\n";
-		quad.draw();
+		lightMesh.draw();
+	}*/
+	for (const BasicParticle s : smokeSystem) {
+
+		int arrSize = sizeof(smokeImages) / sizeof(smokeImages[0]);
+		int index = (rand() % arrSize);
+		shader.setUniformTexture("particle", smokeImages[index], 0);
+		shader.setUniform2f("position", s.getPosition());
+		shader.setUniform1f("life", s.getLife());
+		shader.setUniform4f("color", glm::vec4(.01, .01, .01, 1.0f));
+
+		//std::cout << "Position: " << p.getPosition() << "\n";
+		smokeMesh.draw();
 	}
 
 
 	shader.end();
 	ofDisableBlendMode();
 }
+
+
 
 //--------------------------------------------------------------
 void ofApp::keyPressed(int key){
