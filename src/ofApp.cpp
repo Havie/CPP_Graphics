@@ -8,6 +8,10 @@ void ofApp::setup(){
 	shader.load("passthrough.vert", "colorChange.frag");
 
 	particleImg1.load("textures/magic_01.png");
+	particleImg2.load("textures/magic_02.png");
+	particleImg3.load("textures/magic_03.png");
+	particleImg4.load("textures/magic_04.png");
+	particleImg5.load("textures/magic_05.png");
 }
 
 //--------------------------------------------------------------
@@ -20,12 +24,23 @@ void ofApp::draw(){
 	ofEnableBlendMode(OF_BLENDMODE_ADD);
 	shader.begin();
 	
-	shader.setUniformTexture("particle", particleImg1, 0);
 
 	//particleSystem drawing
 	for (const BasicParticle p : particleSystem) {
 		shader.setUniform2f("position", p.getPosition());
-		std::cout << "Position: " << p.getPosition() << "\n";
+		shader.setUniform1f("life", p.getLife());
+		if (p.getLife() > 0.9 && p.getLife() != 1) {
+			shader.setUniformTexture("particle", particleImg1, 0);
+		} else if (p.getLife() > 0.8) {
+			shader.setUniformTexture("particle", particleImg2, 0);
+		} else if (p.getLife() > 0.7) {
+			shader.setUniformTexture("particle", particleImg3, 0);
+		} else if (p.getLife() > 0.55) {
+			shader.setUniformTexture("particle", particleImg4, 0);
+		} else {
+			shader.setUniformTexture("particle", particleImg5, 0);
+		}
+		//std::cout << "Position: " << p.getPosition() << "\n";
 		quad.draw();
 	}
 

@@ -25,6 +25,10 @@ class ofApp : public ofBaseApp{
 		
 private:
 	ofImage particleImg1;
+	ofImage particleImg2;
+	ofImage particleImg3;
+	ofImage particleImg4;
+	ofImage particleImg5;
 	ofMesh quad;
 	ofShader shader;
 	
