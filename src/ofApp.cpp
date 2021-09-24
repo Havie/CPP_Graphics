@@ -42,12 +42,6 @@ void ofApp::buildMesh(ofMesh& mesh, float w, float h, glm::vec3 pos)
 	}
 }
 
-//--------------------------------------------------------------
-void ofApp::reloadShaders()
-{
-	particleShader.load("uv_passthrough.vert", "colorChange.frag");
-	needsReload = false;
-}
 
 //--------------------------------------------------------------
 void ofApp::draw()
@@ -78,6 +72,13 @@ void ofApp::update()
 	}
 
 	particleSystem.update(ofGetLastFrameTime());
+}
+
+//--------------------------------------------------------------
+void ofApp::reloadShaders()
+{
+	particleShader.load("uv_passthrough.vert", "colorChange.frag");
+	needsReload = false;
 }
 
 //--------------------------------------------------------------
