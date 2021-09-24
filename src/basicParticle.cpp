@@ -23,17 +23,18 @@ glm::vec2 BasicParticle::getPos() const
 }
 
 
-void BasicParticle::update(float delatTime)
+void BasicParticle::update(float deltaTime)
 {
-    float decrement= delatTime * 0.5f;
+    float decrement= deltaTime * 0.5f;
     //update life
     life -= decrement;
     //update size
     size -= decrement;
 
     //update velo
-    velo = velo / delatTime;
+    velo = velo / deltaTime;
     //update pos
-    pos += velo * delatTime;
+    pos += velo * deltaTime;
+    std::cout << "\npos=" << pos;
     
 }

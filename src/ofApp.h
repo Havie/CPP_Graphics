@@ -42,6 +42,6 @@ private :
 
 	//You can new things up like { int x} instead of =new ClassName(int x)
 	//Velocitys shudnt be floats?:
-	BasicParticleGenerator particleGenerator { 1,  1,  5, 1,5 };
+	BasicParticleGenerator particleGenerator { 1,  1, 2,  glm::vec2(0,0),glm::vec2(10,10) };
 	ParticleSystem<BasicParticle> particleSystem { particleGenerator, 42, 20.0f };
 };
