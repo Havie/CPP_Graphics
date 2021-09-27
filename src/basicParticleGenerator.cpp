@@ -20,7 +20,7 @@ void BasicParticleGenerator::respawn(BasicParticle& particle) const
 
 	//randomize things
 	float size = getRandomValue(minSize, maxSize);
-	glm::vec2 position = getRandomV2(glm::vec2(-xPosVariance, xPosVariance), glm::vec2(-yPosVariance, yPosVariance));
+	glm::vec2 position = getRandomV2(glm::vec2(-xPosVariance, -yPosVariance), glm::vec2(xPosVariance, yPosVariance));
 	glm::vec2 velocity =getRandomV2(minVelo, maxVelo);
 
 	particle = BasicParticle(life, size, position, velocity);
@@ -41,5 +41,5 @@ glm::vec2 BasicParticleGenerator::getRandomV2(glm::vec2 min, glm::vec2 max) cons
 
 float BasicParticleGenerator::getRandomValue(float min, float max) const
 {
-	return (rand() % ((int) (min + max) + 1) ) - min;
+	return ((rand() % ((int) ((abs(min) + max)*1000.0) + 1) ) - abs(min)*1000.0)/1000.0;
 }

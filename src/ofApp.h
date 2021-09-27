@@ -33,11 +33,11 @@ private:
 	ofMesh lightMesh;
 	ofMesh smokeMesh;
 	ofShader shader;
-								//(float life, float minSize, float maxSize, glm::vec2 minVelo, glm::vec2 maxVelo);
-	BasicParticleGenerator particleGenerator { 1,  1, 2,  glm::vec2(0,0),glm::vec2(10,10) , .5, .5};
-	BasicParticleGenerator smokeGenerator { 1,  2, 4,  glm::vec2(0,0),glm::vec2(0,10), .1, .1 };
+				//(float life, float minSize, float maxSize, glm::vec2 minVelo, glm::vec2 maxVelo, float xPosVariance, float yPosVariance);
+	BasicParticleGenerator particleGenerator { 1,  1, 2,  glm::vec2(0,0),glm::vec2(1,1) , .5, .5};
+	BasicParticleGenerator smokeGenerator { 1,  2, 4,  glm::vec2(0,0),glm::vec2(0,3), .1, .1 };
 	ParticleSystem<BasicParticle> particleSystem{particleGenerator, 42, 20.0f};
-	ParticleSystem<BasicParticle> smokeSystem{smokeGenerator, 42, 20.0f};
+	ParticleSystem<BasicParticle> smokeSystem{smokeGenerator, 21, 10.0f};
 
 	
 

@@ -39,7 +39,7 @@ void ofApp::draw(){
 	shader.begin();
 	
 	//particleSystem drawing
-	/*for (const BasicParticle p : particleSystem) {
+	for (const BasicParticle p : particleSystem) {
 		
 		shader.setUniform2f("position", p.getPosition());
 		shader.setUniform1f("life", p.getLife());
@@ -58,7 +58,9 @@ void ofApp::draw(){
 		}
 		//std::cout << "Position: " << p.getPosition() << "\n";
 		lightMesh.draw();
-	}*/
+	}
+	ofDisableBlendMode();
+	ofEnableBlendMode(OF_BLENDMODE_ADD);
 	for (const BasicParticle s : smokeSystem) {
 
 		int arrSize = sizeof(smokeImages) / sizeof(smokeImages[0]);
@@ -66,15 +68,14 @@ void ofApp::draw(){
 		shader.setUniformTexture("particle", smokeImages[index], 0);
 		shader.setUniform2f("position", s.getPosition());
 		shader.setUniform1f("life", s.getLife());
-		shader.setUniform4f("color", glm::vec4(.01, .01, .01, 1.0f));
+		shader.setUniform4f("color", glm::vec4(.5, .5, .5, 0.5f));
 
 		//std::cout << "Position: " << p.getPosition() << "\n";
 		smokeMesh.draw();
 	}
 
-
-	shader.end();
 	ofDisableBlendMode();
+	shader.end();
 }
 
 
