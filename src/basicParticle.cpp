@@ -35,6 +35,7 @@ void BasicParticle::update(float dt)
 	life -= dt * 0.5;
 
 	//update position; velocity? position?
-	position += position * velocity * dt;
-	velocity -= velocity * dt;
+	glm::vec2 changeInVelocity = velocity * dt;
+	position += changeInVelocity;
+	velocity -= changeInVelocity;
 }
