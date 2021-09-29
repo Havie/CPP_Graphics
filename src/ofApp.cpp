@@ -34,7 +34,7 @@ void ofApp::setup(){
 	smokeImages[6].load("textures/twirl_01.png");
 	smokeImages[7].load("textures/twirl_02.png");
 	smokeImages[8].load("textures/twirl_03.png");
-	smokeImages[9].load("textures/twirl_01.png");
+	smokeImages[9].load("textures/scratch_01.png");
 
 }
 
@@ -60,7 +60,7 @@ void ofApp::draw(){
 		shader.setUniform2f("position", p.getPosition());
 		shader.setUniform1f("life", p.getLife());
 		shader.setUniform1f("rotationAmount", rotationAmount * 2);
-		shader.setUniform4f("color", glm::vec4(1.0, 1.0, 0.5, 1.0));
+		shader.setUniform4f("color", glm::vec4(0.8, 0.8, 0.4, 0.8));
 
 		if (p.getLife() > 0.9 && p.getLife() != 1) {
 			shader.setUniformTexture("particle", particleImg1, 0);

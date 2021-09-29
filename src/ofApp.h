@@ -35,8 +35,8 @@ private:
 	ofMesh smokeMesh;
 	ofShader shader;
 				//(float life, float minSize, float maxSize, glm::vec2 minVelo, glm::vec2 maxVelo, float xPosVariance, float yPosVariance);
-	BasicParticleGenerator particleGenerator { 1,  1, 2,  glm::vec2(-1,-1),glm::vec2(1,1) , .5, .5};
-	BasicParticleGenerator smokeGenerator { 1,  2, 4,  glm::vec2(0,0),glm::vec2(0,1), .1, .1 };
+	BasicParticleGenerator particleGenerator { 1,  1, 2,  glm::vec2(-.5,-.5),glm::vec2(.5,.5) , .5, .5};
+	BasicParticleGenerator smokeGenerator { 1,  2, 4,  glm::vec2(0.01,0.01),glm::vec2(0.01,0.01), .1, .1 };
 	ParticleSystem<BasicParticle> particleSystem{particleGenerator, 42, 20.0f};
 	ParticleSystem<BasicParticle> smokeSystem{smokeGenerator, 21, 10.0f};
 

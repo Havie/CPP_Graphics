@@ -9,6 +9,13 @@ uniform float rotationAmount;
 out vec2 fragUV;
 
 void main(){
+//	vec2 rotatedPos;
+//	rotatedPos.x = cos(rotationAmount) * position.x - sin(rotationAmount) * position.y;
+//	rotatedPos.y = cos(rotationAmount) * position.y - sin(rotationAmount) * position.x; 
+//	vec2 scale = vec2(0.15, 0.15);
+//	gl_Position = vec4(rotatedPos * scale, 0.0, 1.0);
+//	fragUV = vec2(uv.x, 1.0-uv.y)
+
 	vec2 coord = uv;
 	float sin_factor = sin(rotationAmount);
 	float cos_factor = cos(rotationAmount);
