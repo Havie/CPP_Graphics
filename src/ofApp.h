@@ -1,8 +1,6 @@
 #pragma once
 
 #include "ofMain.h"
-#include "BasicParticleGenerator.h"
-#include "ParticleSystem.h"
 
 class ofApp : public ofBaseApp{
 
@@ -24,23 +22,8 @@ class ofApp : public ofBaseApp{
 		void gotMessage(ofMessage msg);
 		
 private:
-	float rotationAmount;
-	ofImage particleImg1;
-	ofImage particleImg2;
-	ofImage particleImg3;
-	ofImage particleImg4;
-	ofImage particleImg5;
-	ofImage smokeImages[10];
-	ofMesh lightMesh;
-	ofMesh smokeMesh;
 	ofShader shader;
-				//(float life, float minSize, float maxSize, glm::vec2 minVelo, glm::vec2 maxVelo, float xPosVariance, float yPosVariance);
-	BasicParticleGenerator particleGenerator { 1,  1, 2,  glm::vec2(-.5,-.5),glm::vec2(.5,.5) , .5, .5};
-	BasicParticleGenerator smokeGenerator { 1,  2, 4,  glm::vec2(0.01,0.01),glm::vec2(0.01,0.01), .1, .1 };
-	ParticleSystem<BasicParticle> particleSystem{particleGenerator, 42, 20.0f};
-	ParticleSystem<BasicParticle> smokeSystem{smokeGenerator, 21, 10.0f};
-
-	
-
-	void buildMesh(ofMesh& mesh, float w, float h, glm::vec3 pos);
+	ofMesh loganMesh;
+	ofMesh steveMesh;
+	glm::mat4 worldMatrix;
 };
